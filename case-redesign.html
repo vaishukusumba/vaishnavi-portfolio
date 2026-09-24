@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RateMySchedule, Redesigned · Vaishnavi Kusumba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<style>
+  :root{
+    --bg:#FFFFFF;--bg-deep:#0F2A1D;--ink:#14171A;--cream:#F5F1E4;
+    --muted:#6b6b6b;--line:#e7e4dc;--green:#1B8F49;--green-dark:#136b37;--surface:#FBF6EC;--green-bright:#4FCB84;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Bricolage Grotesque';margin:0;}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1080px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{font-family:'Bricolage Grotesque';font-size:19px;color:var(--ink);font-weight:800;letter-spacing:-0.01em;}
+  .nav-links{display:flex;gap:32px;}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink);position:relative;padding-bottom:3px;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--green-dark);transition:width .2s ease;}
+  .nav-links a:hover::after{width:100%;}
+
+  .back-link{display:inline-block;margin:36px 0 20px;font-size:14px;font-weight:600;color:var(--muted);}
+  .back-link:hover{color:var(--ink);}
+
+  .hero-image{width:100%;max-height:460px;background:#eef1f6;overflow:hidden;display:flex;justify-content:center;align-items:center;}
+  .hero-image img{width:auto;max-width:100%;max-height:460px;object-fit:contain;display:block;margin:0 auto;}
+  @media (max-width:720px){ .hero-image{max-height:320px;} .hero-image img{max-height:320px;} }
+
+  .hero-info{display:flex;flex-direction:column;gap:30px;padding:40px 0 36px;border-bottom:1px solid var(--line);}
+  .title-block{max-width:640px;}
+  .case-tags{font-family:'Space Mono';font-size:12px;letter-spacing:.06em;color:var(--green-dark);margin-bottom:14px;display:block;}
+  .title-block h1{font-size:clamp(28px,4.4vw,46px);color:var(--ink);line-height:1.12;margin:0;}
+
+  .meta-grid{display:flex;flex-wrap:wrap;gap:28px 0;width:100%;}
+  .meta-grid .m{flex:1 1 150px;padding:0 24px;border-left:1px solid var(--line);}
+  .meta-grid .m:first-child{padding-left:0;border-left:none;}
+  .meta-grid .k{font-family:'Space Mono';font-size:10.5px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:8px;}
+  .meta-grid .v{font-size:14px;color:var(--ink);font-weight:600;line-height:1.5;}
+
+  .problem-band{background:var(--ink);color:var(--cream);padding:76px 32px;text-align:center;}
+  .problem-band .eyebrow{font-family:'Space Mono';font-size:12px;letter-spacing:.08em;color:var(--green-bright);display:block;margin-bottom:18px;}
+  .problem-band .q{font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(23px,3.6vw,36px);line-height:1.35;max-width:820px;margin:0 auto;}
+
+  .panel{max-width:1016px;margin:0 auto 60px;}
+  .case-section{padding:44px 0;border-top:1px solid var(--line);}
+  .case-section h2{font-size:22px;font-weight:700;margin-bottom:14px;color:var(--ink);}
+  .case-section p.filled{font-size:15.5px;line-height:1.75;color:#2c2c31;font-family:'Inter';margin:0 0 14px;}
+  .case-section p.filled b{color:var(--ink);font-weight:700;}
+
+  .case-media{border-radius:14px;overflow:hidden;margin:20px 0;border:1px solid var(--line);}
+  .case-media img{width:100%;display:block;}
+  .case-caption{font-size:13px;color:var(--muted);font-style:italic;margin-top:10px;text-align:center;}
+  .case-media-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:24px 0;}
+  .case-media-grid .case-media{margin:0;}
+  .ba-col .tag{font-family:'Space Mono';font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:10px;}
+  .ba-col.after .tag{color:var(--green-dark);}
+
+  /* three-up screen grid */
+  .shots-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:22px 0;}
+  .shots-3 .case-media{margin:0;}
+  .shot-label{font-family:'Space Mono';font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px;display:block;}
+  .shot-label b{color:var(--green-dark);font-weight:700;}
+
+  /* atomic design system blocks */
+  .sys-level{padding-top:6px;margin-bottom:8px;}
+  .sys-level .lvl{font-family:'Space Mono';font-size:11px;letter-spacing:.1em;color:var(--green-dark);font-weight:700;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .sys-level h3{font-family:'Bricolage Grotesque';font-size:17px;color:var(--ink);margin:0 0 6px;}
+  .sys-level .lead{font-size:14.5px;line-height:1.7;color:#2c2c31;margin:0 0 18px;font-family:'Inter';max-width:660px;}
+  .sys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin:0 0 40px;}
+  .sys-item{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fbfbf9;}
+  .sys-item img{width:100%;display:block;}
+  .sys-item .cap{font-family:'Space Mono';font-size:10.5px;letter-spacing:.03em;color:var(--muted);padding:9px 12px;border-top:1px solid var(--line);}
+  .sys-stack{display:flex;flex-direction:column;gap:16px;margin:0 0 40px;}
+  .sys-stack .sys-item .cap{border-top:1px solid var(--line);}
+  .sys-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 40px;}
+
+  .browser-frame{max-width:820px;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 50px -24px rgba(20,23,26,.25);background:#fff;}
+  .browser-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;background:#F2F0E9;border-bottom:1px solid var(--line);}
+  .browser-bar .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .browser-bar .dot.r{background:#EE6A5F;}
+  .browser-bar .dot.y{background:#F5BD4F;}
+  .browser-bar .dot.g{background:#61C454;}
+  .browser-bar .url{margin-left:10px;font-family:'Space Mono';font-size:11.5px;color:#8a8a90;background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 10px;flex:1;max-width:260px;}
+  .browser-frame img{width:100%;display:block;}
+
+  .project-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 32px 60px;max-width:1016px;margin:0 auto;flex-wrap:wrap;gap:16px;}
+  .project-nav a{font-family:'Bricolage Grotesque';font-weight:700;font-size:15px;color:var(--ink);padding:12px 22px;border:1.5px solid var(--line);border-radius:999px;}
+  .project-nav a:hover{border-color:var(--ink);}
+
+  footer{background:var(--bg-deep);color:var(--cream);padding:50px 32px 30px;margin-top:20px;}
+  .footer-inner{max-width:1080px;margin:0 auto;text-align:center;}
+  footer p{font-size:14px;color:#9db3a5;margin:0;font-family:'Inter';}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .case-tags,.title-block h1{opacity:0;animation:fadeUp .6s ease forwards;}
+  .case-tags{animation-delay:.05s;}
+  .title-block h1{animation-delay:.12s;}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .case-tags,.title-block h1,.reveal{animation:none!important;transition:none!important;opacity:1!important;transform:none!important;} }
+
+  @media (max-width:720px){
+    .wrap{padding:0 20px;}
+    .title-block{max-width:none;}
+    .meta-grid{flex-direction:column;gap:18px;}
+    .meta-grid .m{padding:0;border-left:none;padding-top:14px;border-top:1px solid var(--line);}
+    .meta-grid .m:first-child{padding-top:0;border-top:none;}
+    .project-nav{padding:20px 20px 50px;}
+    .case-media-grid,.sys-two{grid-template-columns:1fr;}
+    .shots-3{grid-template-columns:1fr;}
+    .sys-grid{grid-template-columns:1fr 1fr;}
+    .problem-band{padding:56px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">vaishnavi kusumba</div>
+    <div class="nav-links">
+      <a href="index.html#work">work</a>
+      <a href="index.html#about">about</a>
+      <a href="index.html#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back-link" href="index.html#work">← back to all work</a>
+</div>
+
+<!-- HERO: the redesigned upload screen -->
+<div class="hero-image reveal"><img src="images/redesign.png" alt="Redesigned RateMySchedule upload screen"></div>
+
+<div class="wrap">
+  <div class="hero-info">
+    <div class="title-block">
+      <span class="case-tags">figma, design system, ux/ui redesign</span>
+      <h1>RateMySchedule, Redesigned</h1>
+    </div>
+    <div class="meta-grid">
+      <div class="m"><span class="k">team</span><span class="v">Solo, self-directed redesign</span></div>
+      <div class="m"><span class="k">role</span><span class="v">Product Designer</span></div>
+      <div class="m"><span class="k">skills</span><span class="v">Figma, Design System, Atomic Design, UI/UX</span></div>
+      <div class="m"><span class="k">ambition</span><span class="v">Turn a 24-hour hackathon win into a real product, built on a system.</span></div>
+      <!-- Set this Figma link's sharing to "anyone with the link can view" so recruiters can open it. -->
+      <div class="m"><span class="k">prototype</span><span class="v"><a href="https://www.figma.com/design/TsJEO7iXrUNPa49SnUWu2T/rate-my-schedule-redesign" target="_blank" rel="noopener" style="text-decoration:underline;">Figma file →</a></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="problem-band reveal">
+  <span class="eyebrow">the redesign</span>
+  <p class="q">It won the hackathon. But it still made students retype what their schedule already knew, and buried the grade they came for. What would it take to make it effortless?</p>
+</div>
+
+<div class="wrap"><div class="panel">
+
+    <div class="case-section reveal">
+      <h2>the starting point</h2>
+      <p class="filled">RateMySchedule started as a 24-hour build at SteelHacks XI, where it won Best Pitt-Inspired Demo. The scoring logic held up: it graded a schedule on walking time, professor quality, and credit load, then had AI write an encouraging report card. But 24 hours buys working logic, not a considered interface. I came back to it on my own to redo the whole thing, this time as a real product with a design system underneath it.</p>
+    </div>
+
+    <div class="case-section reveal">
+      <h2>the audit</h2>
+      <p class="filled">I walked through the original flow the way a stressed sophomore would: late at night, on a phone, three days before enrollment. A few things stood out.</p>
+      <p class="filled">The schedule file already listed every class, yet the app still asked students to type each professor and credit count by hand on a separate screen. The three steps felt like three disconnected pages. And the report card put the grade, the category scores, and the explanation all at the same volume, so the thing students actually came for was buried. The whole layout also assumed a laptop.</p>
+      <div class="shots-3">
+        <div class="case-media"><img src="images/home.png" alt="Original upload screen"></div>
+        <div class="case-media"><img src="images/input.png" alt="Original manual input form"></div>
+        <div class="case-media"><img src="images/output.png" alt="Original report card"></div>
+      </div>
+      <p class="case-caption">The original three screens: upload, a manual entry form, and a dense report card.</p>
+    </div>
+
+    <div class="case-section reveal">
+      <h2>designing a system, not just screens</h2>
+      <p class="filled">Instead of redrawing three screens, I rebuilt the interface as an <b>atomic design system</b>. Every screen is assembled from the same small parts, so the visual language stays consistent and the product is easy to extend later. I worked up from the smallest pieces to full layouts: atoms, then molecules, then organisms, then templates.</p>
+
+      <div class="sys-level">
+        <span class="lvl">atoms</span>
+        <h3>the foundations</h3>
+        <p class="lead">Color, type, spacing, radius, buttons, inputs and steppers, icons, and the letter-grade and icon tiles that the whole report card is built on. Every later piece pulls from these.</p>
+      </div>
+      <div class="sys-grid">
+        <div class="sys-item"><img src="images/color.png" alt="Color palette">          <div class="cap">color</div></div>
+        <div class="sys-item"><img src="images/TYPE.png" alt="Type scale">              <div class="cap">type</div></div>
+        <div class="sys-item"><img src="images/SPACING.png" alt="Spacing scale">        <div class="cap">spacing</div></div>
+        <div class="sys-item"><img src="images/RADIUS.png" alt="Corner radius">         <div class="cap">radius</div></div>
+        <div class="sys-item"><img src="images/BUTTONS.png" alt="Buttons">              <div class="cap">buttons</div></div>
+        <div class="sys-item"><img src="images/inputs-steppers.png" alt="Inputs and steppers"><div class="cap">inputs &amp; steppers</div></div>
+        <div class="sys-item"><img src="images/letter-grade-icon-tile.png" alt="Letter grade and icon tiles"><div class="cap">letter grade &amp; icon tile</div></div>
+        <div class="sys-item"><img src="images/badges-label-logo.png" alt="Badges, label, logo"><div class="cap">badges, label, logo</div></div>
+        <div class="sys-item"><img src="images/ICONS.png" alt="Icons">                  <div class="cap">icons</div></div>
+      </div>
+
+      <div class="sys-level">
+        <span class="lvl">molecules</span>
+        <h3>small combinations</h3>
+        <p class="lead">Atoms grouped into the smallest useful pieces: a class row, the upload dropzone, the step tabs, the credit stepper with its feature chip, and the grade-category card.</p>
+      </div>
+      <div class="sys-grid">
+        <div class="sys-item"><img src="images/CLASS-ROW.png" alt="Class row">            <div class="cap">class row</div></div>
+        <div class="sys-item"><img src="images/DROPZONE.png" alt="Upload dropzone">       <div class="cap">dropzone</div></div>
+        <div class="sys-item"><img src="images/stepper-tab-variants.png" alt="Stepper tab variants"><div class="cap">stepper-tab variants</div></div>
+        <div class="sys-item"><img src="images/GRADE-CATEGORY-CARD.png" alt="Grade category card"><div class="cap">grade-category card</div></div>
+        <div class="sys-item"><img src="images/credit-stepper-feature-chip.png" alt="Credit stepper and feature chip"><div class="cap">credit stepper + feature chip</div></div>
+      </div>
+
+      <div class="sys-level">
+        <span class="lvl">organisms</span>
+        <h3>full sections</h3>
+        <p class="lead">Molecules assembled into the real sections of the product: the top nav, the upload panel, the class list, the grade hero, and the report breakdown.</p>
+      </div>
+      <div class="sys-stack">
+        <div class="sys-item"><img src="images/TOP-NAV.png" alt="Top navigation">          <div class="cap">top-nav</div></div>
+        <div class="sys-item"><img src="images/UPLOAD-PANEL.png" alt="Upload panel">        <div class="cap">upload-panel</div></div>
+        <div class="sys-item"><img src="images/CLASS-LIST.png" alt="Class list">            <div class="cap">class-list</div></div>
+        <div class="sys-item"><img src="images/GRADE-HERO.png" alt="Grade hero">            <div class="cap">grade-hero</div></div>
+        <div class="sys-item"><img src="images/REPORT-BREAKDOWN.png" alt="Report breakdown"><div class="cap">report-breakdown</div></div>
+      </div>
+
+      <div class="sys-level">
+        <span class="lvl">templates</span>
+        <h3>assembled layouts</h3>
+        <p class="lead">The organisms placed into full screen layouts, where the flow and spacing get resolved before the final visuals.</p>
+      </div>
+      <div class="sys-two">
+        <div class="sys-item"><img src="images/frame-1.png" alt="Full flow template">     <div class="cap">full flow</div></div>
+        <div class="sys-item"><img src="images/frame-2.png" alt="Screen states template"><div class="cap">screen states</div></div>
+      </div>
+    </div>
+
+    <div class="case-section reveal">
+      <h2>the redesigned screens</h2>
+      <p class="filled">Where the system lands. The new flow is one continuous track with a visible progress tracker, prefilled classes so students confirm instead of type, and a report card led by the grade with the reasoning underneath.</p>
+      <div class="shots-3">
+        <div class="case-media"><span class="shot-label"><b>1</b> upload</span><img src="images/redesign.png" alt="Redesigned upload screen"></div>
+        <div class="case-media"><span class="shot-label"><b>2</b> your classes</span><img src="images/redesign2.png" alt="Redesigned class-list screen"></div>
+        <div class="case-media"><span class="shot-label"><b>3</b> report card</span><img src="images/redesign3.png" alt="Redesigned report card screen"></div>
+      </div>
+      <p class="filled">And because registration-week panic usually happens on a phone, the whole thing is designed mobile-first.</p>
+      <div class="case-media"><img src="images/mobile_design.png" alt="Redesigned mobile screens"></div>
+      <p class="case-caption">The same three steps on mobile.</p>
+    </div>
+
+    <div class="case-section reveal">
+      <h2>before &amp; after</h2>
+      <p class="filled">The clearest change is the report card: from a flat wall of text to a layout led by the grade, with a scannable breakdown underneath.</p>
+      <div class="case-media-grid">
+        <div class="ba-col before">
+          <span class="tag">before</span>
+          <div class="case-media"><img src="images/output.png" alt="Original report card"></div>
+        </div>
+        <div class="ba-col after">
+          <span class="tag">after</span>
+          <div class="case-media"><img src="images/redesign3.png" alt="Redesigned report card"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-section reveal">
+      <h2>what i learned</h2>
+      <p class="filled">Redesigning something I'd already shipped was harder than starting from a blank file. The biggest shift was building a system instead of screens. Once the atoms and molecules existed, the actual screens came together fast and stayed consistent, and I could change one token and watch it update everywhere. Most of what made the original feel rough wasn't the scoring logic. It was how much work the interface pushed onto the student, and how little the pieces agreed with each other.</p>
+    </div>
+
+  </div></div>
+
+<div class="project-nav">
+  <a href="case-ratemyschedule.html">← RateMySchedule (the build)</a>
+  <a href="case-afv-travel.html">A.F.V. Travel →</a>
+</div>
+<footer>
+  <div class="footer-inner">
+    <p>vaishuskusumba@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
