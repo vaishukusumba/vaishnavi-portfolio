@@ -19,6 +19,7 @@
     --muted-on-green:#AFC7B7;
     --line:#e3e1d9;
     --green:#1B8F49;
+    --green-dark:#136b37;
     --green-bright:#4FCB84;
     --pink:#F0A9C4;
     --yellow:#F6C93B;
@@ -93,7 +94,7 @@
   }
   .section-label{
     font-family:'Space Mono';font-size:12px;letter-spacing:.1em;
-    color:var(--green);font-weight:700;margin-bottom:8px;display:block;
+    color:var(--green-dark);font-weight:700;margin-bottom:8px;display:block;
   }
   .section-title{font-size:30px;font-weight:700;margin:0 0 36px;color:var(--ink);}
 
@@ -114,13 +115,41 @@
   .project-title{
     font-size:23px;font-weight:700;margin-bottom:10px;display:inline-block;color:var(--ink);
   }
-  .project-title:hover{color:var(--green);}
+  .project-title:hover{color:var(--green-dark);}
   .project-desc{font-size:15.5px;line-height:1.7;color:#333338;max-width:560px;margin:0 0 16px;font-family:'Inter';}
   .project-link{
-    font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--green);
-    border-bottom:1.5px solid var(--green);padding-bottom:2px;
+    font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--green-dark);
+    border-bottom:1.5px solid var(--green-dark);padding-bottom:2px;
   }
-  .project-link:hover{color:#136b37;border-color:#136b37;}
+  .project-link:hover{color:#0e4f2a;border-color:#0e4f2a;}
+
+  /* ---------- PROJECT GROUP (paired build + redesign) ---------- */
+  .group-eyebrow{
+    font-family:'Space Mono';font-size:12px;letter-spacing:.06em;
+    color:var(--green-dark);font-weight:700;display:block;margin-bottom:24px;
+  }
+  .group-grid{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:0 26px;
+  }
+  .group-card{min-width:0;}
+  .group-card .project-media{position:relative;aspect-ratio:16/10;margin-bottom:20px;}
+  .group-card .project-title{font-size:20px;}
+  .group-card .project-desc{font-size:14.5px;max-width:none;}
+  .media-pill{
+    position:absolute;top:12px;left:12px;z-index:2;
+    font-family:'Space Mono';font-size:10.5px;letter-spacing:.06em;
+    background:rgba(20,23,26,.82);color:var(--cream);
+    padding:4px 10px;border-radius:999px;
+  }
+  .media-pill.redesign{background:var(--green-dark);}
+  .group-connector{
+    align-self:center;font-family:'Bricolage Grotesque';font-weight:700;
+    font-size:24px;color:var(--green);line-height:1;
+  }
+  @media (max-width:720px){
+    .group-grid{grid-template-columns:1fr;gap:0;}
+    .group-connector{justify-self:center;transform:rotate(90deg);padding:6px 0 20px;}
+  }
 
   /* ---------- PERSONALITY STRIP ---------- */
   .vibe-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px;}
@@ -218,25 +247,47 @@
     <div class="panel reveal">
       <span class="section-label">featured work</span>
 
+      <!-- FIRST: RateMySchedule build + redesign, shown side by side as one project in two chapters -->
+      <div class="project project-group">
+        <span class="group-eyebrow">one project, two chapters</span>
+        <div class="group-grid">
+          <article class="group-card">
+            <div class="project-media">
+              <span class="media-pill">the build</span>
+              <img src="images/rate-my-schedule.png" alt="RateMySchedule">
+            </div>
+            <span class="project-eyebrow">react, python/flask, gemini api</span>
+            <h3 class="project-title">RateMySchedule</h3>
+            <p class="project-desc">1st place at SteelHacks XI. An AI tool that scores a schedule on walking time, professor ratings, and credit load.</p>
+            <a class="project-link" href="case-ratemyschedule.html">view case study →</a>
+          </article>
+
+          <div class="group-connector" aria-hidden="true">→</div>
+
+          <article class="group-card">
+            <div class="project-media">
+              <span class="media-pill redesign">the redesign</span>
+              <img src="images/redesign.png" alt="RateMySchedule redesign">
+            </div>
+            <span class="project-eyebrow">figma, ux/ui redesign, interaction design</span>
+            <h3 class="project-title">RateMySchedule, Redesigned</h3>
+            <p class="project-desc">A complete redesign of the entire interface, reworking the visual design, layout, and end-to-end user experience to turn the functional hackathon build into a polished, intuitive product.</p>
+            <a class="project-link" href="case-ratemyschedule-redesign.html">view case study →</a>
+          </article>
+        </div>
+      </div>
+
       <div class="project">
         <div class="project-media"><img src="images/pitt-plugged.png" alt="Pitt Plugged app"></div>
-        <span class="project-eyebrow">user research · ux/ui design · figma</span>
+        <span class="project-eyebrow">user research, ux/ui design, figma</span>
         <h3 class="project-title">Pitt Plugged</h3>
-        <p class="project-desc">A music-sharing social app that connects Pitt students through songs, posts, and live event discovery — designed to feel low-pressure, not performative.</p>
+        <p class="project-desc">A music-sharing social app that connects Pitt students through songs, posts, and live event discovery, designed to feel low-pressure instead of performative.</p>
         <a class="project-link" href="case-pitt-plugged.html">view case study →</a>
       </div>
 
       <div class="project">
-        <div class="project-media"><img src="images/rate-my-schedule.png" alt="RateMySchedule"></div>
-        <span class="project-eyebrow">react · python/flask · api integration</span>
-        <h3 class="project-title">RateMySchedule</h3>
-        <p class="project-desc">🏆 1st place, Best Pitt-Inspired Demo at SteelHacks XI. An AI-powered tool that scores a class schedule on walking time, professor ratings, and credit load.</p>
-        <a class="project-link" href="case-ratemyschedule.html">view case study →</a>
-      </div>
-
-      <div class="project">
         <div class="project-media"><img src="images/travel-agency.png" alt="AFV Travel"></div>
-        <span class="project-eyebrow">sql · backend logic · er modeling</span>
+        <span class="project-eyebrow">sql, backend logic, er modeling</span>
         <h3 class="project-title">A.F.V. Travel</h3>
         <p class="project-desc">A full-stack online travel agency with search, customization, cart, and checkout, backed by a BCNF-normalized database built to hold up under real bookings.</p>
         <a class="project-link" href="case-afv-travel.html">view case study →</a>
@@ -261,7 +312,7 @@
 <footer id="contact">
   <div class="footer-inner">
     <span class="footer-name">vaishnavi kusumba</span>
-    <p>West Chester, PA · Open to internships and collaborations</p>
+    <p>West Chester, PA</p>
     <div class="footer-links">
       <a href="mailto:vaishuskusumba@gmail.com">vaishuskusumba@gmail.com</a>
       <a href="https://www.linkedin.com/in/vaishnavi-kusumba" target="_blank" rel="noopener">LinkedIn</a>
