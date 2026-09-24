@@ -93,8 +93,8 @@
     padding:64px 56px;margin:0 auto 28px;max-width:1016px;
   }
   .section-label{
-    font-family:'Space Mono';font-size:12px;letter-spacing:.1em;
-    color:var(--green-dark);font-weight:700;margin-bottom:8px;display:block;
+    font-family:'Space Mono';font-size:15px;letter-spacing:.08em;
+    color:var(--green-dark);font-weight:700;margin-bottom:14px;display:block;
   }
   .section-title{font-size:30px;font-weight:700;margin:0 0 36px;color:var(--ink);}
 
@@ -132,16 +132,17 @@
     display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:0 26px;
   }
   .group-card{min-width:0;}
-  .group-card .project-media{position:relative;aspect-ratio:16/10;margin-bottom:20px;}
+  .group-card .project-media{position:relative;aspect-ratio:16/10;margin-bottom:20px;background:#eef1f6;}
+  .group-card .project-media img{object-fit:contain;}
   .group-card .project-title{font-size:20px;}
   .group-card .project-desc{font-size:14.5px;max-width:none;}
-  .media-pill{
-    position:absolute;top:12px;left:12px;z-index:2;
+  .group-card-label{
+    display:inline-block;
     font-family:'Space Mono';font-size:10.5px;letter-spacing:.06em;
     background:rgba(20,23,26,.82);color:var(--cream);
-    padding:4px 10px;border-radius:999px;
+    padding:4px 11px;border-radius:999px;margin-bottom:14px;
   }
-  .media-pill.redesign{background:var(--green-dark);}
+  .group-card-label.redesign{background:var(--green-dark);}
   .group-connector{
     align-self:center;font-family:'Bricolage Grotesque';font-weight:700;
     font-size:24px;color:var(--green);line-height:1;
@@ -252,8 +253,8 @@
         <span class="group-eyebrow">one project, two chapters</span>
         <div class="group-grid">
           <article class="group-card">
+            <span class="group-card-label">the build</span>
             <div class="project-media">
-              <span class="media-pill">the build</span>
               <img src="images/rate-my-schedule.png" alt="RateMySchedule">
             </div>
             <span class="project-eyebrow">react, python/flask, gemini api</span>
@@ -265,8 +266,8 @@
           <div class="group-connector" aria-hidden="true">→</div>
 
           <article class="group-card">
+            <span class="group-card-label redesign">the redesign</span>
             <div class="project-media">
-              <span class="media-pill redesign">the redesign</span>
               <img src="images/redesign.png" alt="RateMySchedule redesign">
             </div>
             <span class="project-eyebrow">figma, ux/ui redesign, interaction design</span>
